@@ -223,7 +223,6 @@ public class Graph {
    * @return maze
    */
   public String printBFS() {
-    // reset the vertices in the main maze
     Vertex currentVertex = vertexList[0];
     Queue<Vertex> verticesQueue = new LinkedList<Vertex>();
     verticesQueue.add(currentVertex);
@@ -248,9 +247,9 @@ public class Graph {
       currentVertex = currentVertex.previous;
     }
     currentVertex.value = "#";
-    System.out.println(printMaze());
 
     System.out.println("\n\nBFS:");
+    System.out.println(printMaze()+"\n");
     return solveMaze();
   }
 
@@ -260,7 +259,6 @@ public class Graph {
    * @return maze
    */
   public String printDFS() {
-    // reset vertices
     Vertex currentVertex = vertexList[0];
     Stack<Vertex> verticesStack = new Stack<>();
     verticesStack.push(currentVertex);
@@ -284,7 +282,9 @@ public class Graph {
       currentVertex = currentVertex.previous;
     }
     currentVertex.value = "#";
+
     System.out.println("\n\nDFS:");
+    System.out.println("\n" + printMaze() + "\n");
     return solveMaze();
   }
 }
