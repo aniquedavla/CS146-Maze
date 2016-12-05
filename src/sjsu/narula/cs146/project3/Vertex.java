@@ -28,5 +28,6 @@ public class Vertex {
     this.value = "";
     adjList = new LinkedList<>();
     this.previous = null;
+    this.step = -1;
   }
 } // end class Vertex

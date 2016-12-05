@@ -95,9 +95,10 @@ public class Graph {
     for (int i = 0; i < size; i++){
       maze += "|";
       for (int j = 0; j < size - 1; j++){
-        maze += (adjMatrix[j][i].RIGHT) ? " |" : "  ";
+        maze += (adjMatrix[j][i].step > -1) ? adjMatrix[j][i].step % 10 : " ";
+        maze += (adjMatrix[j][i].RIGHT) ?  "|" : " ";
       }
-     maze += " |\n+";
+     maze += (adjMatrix[size - 1][i].step > -1) ? adjMatrix[size-1][i].step % 10 + "|\n+" : " |\n+";
      if (i < size - 1) {
        for (int j = 0; j < size; j++) {
          maze += (adjMatrix[j][i].DOWN) ? "-+" :" +";
@@ -154,11 +155,10 @@ public class Graph {
     }
 
     for (int i = 0; i < size; i++){
-        maze += (!adjMatrix[i][size-1].DOWN) ? "#":"-+";
+      maze += (!adjMatrix[i][size-1].DOWN) ? "#":"-+";
     }
 
     maze += "+";
-
     return maze;
   }
 
@@ -229,7 +229,7 @@ public class Graph {
     verticesQueue.add(currentVertex);
     int step = 0;
 
-    while(!verticesQueue.isEmpty() && !currentVertex.equals(vertexList[vertexList.length- 1])){
+    while(!verticesQueue.isEmpty() && !currentVertex.equals(vertexList[vertexList.length - 1])){
       currentVertex = verticesQueue.remove();
       currentVertex.color = VertexColor.BLACK;
       currentVertex.step = step;
@@ -241,16 +241,15 @@ public class Graph {
           verticesQueue.add(vertex);
         }
       }
-
     }
 
-    while(currentVertex != vertexList[0])
-    {
+    while(currentVertex != vertexList[0]) {
       currentVertex.value = "#";
       currentVertex = currentVertex.previous;
     }
     currentVertex.value = "#";
 
+    System.out.println(printMaze());
     return solveMaze();
   }
 
