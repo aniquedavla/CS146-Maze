@@ -248,9 +248,10 @@ public class Graph {
       currentVertex = currentVertex.previous;
     }
     currentVertex.value = "#";
-    System.out.println(printMaze());
 
     System.out.println("\n\nBFS:");
+    System.out.println(printMaze());
+    System.out.println();
     return solveMaze();
   }
 
@@ -285,6 +286,8 @@ public class Graph {
     }
     currentVertex.value = "#";
     System.out.println("\n\nDFS:");
+    System.out.println(printMaze());
+    System.out.println();
     return solveMaze();
   }
 }
