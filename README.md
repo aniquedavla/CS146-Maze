@@ -1,6 +1,7 @@
 # CS146 Project 3 - Maze
-
-Maze project that creates a perfect maze and then solves it using Depth-first search, `DFS` and Breadth-first search, `BFS` techniques.
+In this project, we implemented a "perfect" Maze, where all cells of the maze are connected. We used Depth First Search
+approach to build a perfect Maze first. After building the Maze, we implemented Depth First Search (DFS) and
+Breadth First Search (BFS) to solve the maze.
 
 ### How to Run the Code
 Run the `GraphTest.java` file by going to:
@@ -19,3 +20,58 @@ The `GraphTest.java` class logs the following:
 ### Contributors
 Keshav Narula
 Rodion Yaryy
+
+### Example of the Output
+
+------- 4x4 Graph -------
++ +-+-+-+
+|       |
++-+-+-+ +
+|     | |
++-+ +-+ +
+|   |   |
++ +-+ +-+
+|       |
++-+-+-+ +
+
+BFS:
++ +-+-+-+
+|0 1 2 3|
++-+-+-+ +
+|     |4|
++-+ +-+ +
+|   |6 5|
++ +-+ +-+
+|  8 7 9|
++-+-+-+ +
+
++#+-+-+-+
+|#######|
++-+-+-+#+
+|     |#|
++-+ +-+#+
+|   |###|
++ +-+#+-+
+|    ###|
++-+-+-+#+
+
+DFS:
++ +-+-+-+
+|0 1 2 3|
++-+-+-+ +
+|     |4|
++-+ +-+ +
+|   |6 5|
++ +-+ +-+
+|    7 8|
++-+-+-+ +
+
++#+-+-+-+
+|#######|
++-+-+-+#+
+|     |#|
++-+ +-+#+
+|   |###|
++ +-+#+-+
+|    ###|
++-+-+-+#+

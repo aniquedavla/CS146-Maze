@@ -2,6 +2,7 @@ package sjsu.narula.cs146.project3;
 
 import java.util.LinkedList;
 
+// Constant Colors
 enum VertexColor {
     WHITE, GRAY, BLACK;
 }
@@ -10,17 +11,19 @@ enum VertexColor {
  * Vertex class
  */
 public class Vertex {
+    // Directions for the walls for each vertex. All Walls are set to true by default
     boolean UP = true;
     boolean DOWN = true;
     boolean LEFT = true;
     boolean RIGHT = true;
+    // default color for vertex is White
     VertexColor color = VertexColor.WHITE;
     LinkedList<Vertex> adjList;
-    String value;
+    String value; //value of the vertex (ex: "#" or " ")
     int i; // row position of the Vertex
     int j; // column position of the Vertex
-    Vertex previous;
-    int step;
+    Vertex previous; // previous vertex
+    int step; // Step in the sequence
 
     /**
      * Contructs the vertex
