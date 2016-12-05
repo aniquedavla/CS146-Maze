@@ -262,11 +262,11 @@ public class Graph {
   public String printDFS() {
     // reset vertices
     Vertex currentVertex = vertexList[0];
-    Queue<Vertex> verticesQueue = new LinkedList<>();
-    verticesQueue.add(currentVertex);
+    Stack<Vertex> verticesStack = new Stack<>();
+    verticesStack.push(currentVertex);
     int step = 0;
-    while (!verticesQueue.isEmpty() && !currentVertex.equals(vertexList[vertexList.length - 1])) {
-      currentVertex = verticesQueue.remove();
+    while (!verticesStack.isEmpty() && !currentVertex.equals(vertexList[vertexList.length - 1])) {
+      currentVertex = verticesStack.pop();
       currentVertex.color = VertexColor.BLACK;
       currentVertex.step = step;
       step++;
@@ -274,7 +274,7 @@ public class Graph {
         if (v.color == VertexColor.WHITE) {
           v.color = VertexColor.GRAY;
           v.previous = currentVertex;
-          verticesQueue.add(v);
+          verticesStack.add(v);
         }
       }
     }
