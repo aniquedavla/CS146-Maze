@@ -1,4 +1,6 @@
 # CS146 Project 3 - Maze
+Keshav Narula - 009745138
+Rodion Yaryy - 010915333
 
 Maze project that creates a perfect maze and then solves it using Depth-first search, `DFS` and Breadth-first search, `BFS` techniques.
 
