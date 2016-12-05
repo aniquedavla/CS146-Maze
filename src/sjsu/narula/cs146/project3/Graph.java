@@ -6,10 +6,10 @@ import java.util.*;
  * Graph class that creates randomized maze and solve via BFS & DFS
  */
 public class Graph {
-    private Random randomGen;
-    private Vertex vertexList[];
-    private Vertex adjMatrix[][];
-    private int adjMatrixSize;
+    private Random randomGen; // Random maze
+    private Vertex vertexList[]; // Stores each Vertex
+    private Vertex adjMatrix[][]; // 2D representation of maze
+    private int adjMatrixSize; // Size of the maze
 
     /**
      * Constructs the Maze
