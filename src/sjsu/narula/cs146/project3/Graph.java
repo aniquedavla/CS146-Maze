@@ -223,7 +223,6 @@ public class Graph {
    * @return maze
    */
   public String printBFS() {
-    // reset the vertices in the main maze
     Vertex currentVertex = vertexList[0];
     Queue<Vertex> verticesQueue = new LinkedList<Vertex>();
     verticesQueue.add(currentVertex);
@@ -261,7 +260,11 @@ public class Graph {
    * @return maze
    */
   public String printDFS() {
-    // reset vertices
+    for (int i = 0; i < vertexList.length; i++) {
+      vertexList[i].color = VertexColor.WHITE;
+      vertexList[i].step = -1;
+      vertexList[i].previous = null;
+    }
     Vertex currentVertex = vertexList[0];
     Stack<Vertex> verticesStack = new Stack<>();
     verticesStack.push(currentVertex);
