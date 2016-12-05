@@ -1,4 +1,4 @@
-package src.sjsu.narula.cs146.project3;
+package sjsu.narula.cs146.project3;
 
 import java.util.*;
 
@@ -36,8 +36,6 @@ public class Graph {
     createMaze();
   }
 
-
-
   /**
    * Generates random number between 0 and 1
    * Method provided by professor Potika
@@ -50,6 +48,8 @@ public class Graph {
 
   /**
    * Creates the maze
+   * Breaks necessary walls
+   * Connects all of the vertices together
    */
   public void createMaze() {
     Stack<Vertex> vertexStack = new Stack<Vertex>();
@@ -216,6 +216,13 @@ public class Graph {
     }
   }
 
+  public void resetVertices() {
+    for (int i = 0; i < vertexList.length; i++) {
+      vertexList[i].color = null;
+      vertexList[i].step = -1;
+      vertexList[i].previous = null;
+    }
+  }
 
 
   /**
@@ -224,6 +231,7 @@ public class Graph {
    * @return maze
    */
   public String printBFS() {
+    // reset the vertices in the main maze
     Vertex currentVertex = vertexList[0];
     Queue<Vertex> verticesQueue = new LinkedList<Vertex>();
     verticesQueue.add(currentVertex);
@@ -251,6 +259,7 @@ public class Graph {
     }
     currentVertex.value = "#";
 
+    System.out.println("\n\nBFS:");
     return solveMaze();
   }
 
@@ -260,6 +269,31 @@ public class Graph {
    * @return maze
    */
   public String printDFS() {
-    return null;
+    // reset vertices
+    Vertex currentVertex = vertexList[0];
+    Queue<Vertex> verticesQueue = new LinkedList<>();
+    verticesQueue.add(currentVertex);
+    int step = 0;
+    while (!verticesQueue.isEmpty() && !currentVertex.equals(vertexList[vertexList.length - 1])) {
+      currentVertex = verticesQueue.remove();
+      currentVertex.color = VertexColor.BLACK;
+      currentVertex.step = step;
+      step++;
+      for (Vertex v: currentVertex.adjList) {
+        if (v.color == VertexColor.WHITE) {
+          v.color = VertexColor.GRAY;
+          v.previous = currentVertex;
+          verticesQueue.add(v);
+        }
+      }
+    }
+
+    while(currentVertex != vertexList[0]) {
+      currentVertex.value = "#";
+      currentVertex = currentVertex.previous;
+    }
+    currentVertex.value = "#";
+    System.out.println("\n\nDFS:");
+    return solveMaze();
   }
 }

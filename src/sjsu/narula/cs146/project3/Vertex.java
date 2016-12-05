@@ -1,4 +1,4 @@
-package src.sjsu.narula.cs146.project3;
+package sjsu.narula.cs146.project3;
 
 import java.util.LinkedList;
 
@@ -6,8 +6,11 @@ enum VertexColor {
   WHITE, GRAY, BLACK;
 }
 
+/**
+ * Vertex class
+ */
 public class Vertex {
-  public char label; // label (e.g. ‘A’)
+  public char label;
   public boolean wasVisited;
 
   public boolean UP = true;
