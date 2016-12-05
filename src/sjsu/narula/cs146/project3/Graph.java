@@ -1,4 +1,4 @@
-package sjsu.narula.cs146.project3;
+package src.sjsu.narula.cs146.project3;
 
 import java.util.*;
 
