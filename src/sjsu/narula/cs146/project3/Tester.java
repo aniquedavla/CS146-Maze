@@ -6,12 +6,11 @@ package src.sjsu.narula.cs146.project3;
 public class Tester {
   public static void main(String args[])
   {
-    Graph g = new Graph(2);
+    Graph g = new Graph(6);
     System.out.println(g.printMaze());
     Graph g2 = new Graph(2);
     System.out.println(g2.printMaze());
 
-    //g.createMaze();
-    //System.out.print(g.printMaze());
+    System.out.print(g.printBFS());
   }
 }

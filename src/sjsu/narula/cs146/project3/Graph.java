@@ -10,7 +10,6 @@ public class Graph {
   private Random randomGen;
   private Vertex vertexList[];
   private Vertex adjMatrix[][];
-  private int numberOfVertices;
   private int adjMatrixSize;
 
   /**
@@ -22,12 +21,17 @@ public class Graph {
 
     vertexList = new Vertex[dimension * dimension];
     adjMatrix = new Vertex[dimension][dimension];
-    numberOfVertices = 0;
     adjMatrixSize = adjMatrix.length - 1;
 
+    int count = 0;
+
     for(int j=0; j < dimension; j++) // set adjacency
-      for(int k=0; k < dimension; k++) // matrix to 0
-        adjMatrix[j][k] = new Vertex(j, k);
+      for(int k=0; k < dimension; k++) { // matrix to 0
+        Vertex vertex = new Vertex(j, k);
+        adjMatrix[j][k] = vertex;
+        vertexList[count] = vertex;
+        count++;
+      }
 
     createMaze();
   }
@@ -52,7 +56,6 @@ public class Graph {
     Vertex currentVertex = adjMatrix[0][0];
     int visitedVertices = 1;
     int totalVertices = vertexList.length;
-    boolean lastVertex = false;
 
     while (visitedVertices < totalVertices) {
       List<Vertex> neighborhoodList = findNeighbors(currentVertex);
@@ -63,6 +66,8 @@ public class Graph {
         int randomValue = (int) (myRandom() * neighborhoodList.size());
         currentVertex = neighborhoodList.get(randomValue);
         breakWalls(currentVertex, selectedVertex);
+        currentVertex.adjList.add(selectedVertex);
+        selectedVertex.adjList.add(currentVertex);
         visitedVertices++;
       }
       else {
@@ -103,6 +108,53 @@ public class Graph {
 
     for (int i = 0; i < size; i++){
       maze += (!adjMatrix[i][size-1].DOWN) ? " ":"-+";
+    }
+
+    maze += "+";
+
+    return maze;
+  }
+
+
+  public String solveMaze() {
+    String maze = "";
+    int size = adjMatrix.length;
+
+    for (int i = 0; i < size; i++){
+      maze += (i == 0) ? "+#" : "+-";
+    }
+    maze += "+\n";
+
+    for (int i = 0; i < size; i++){
+      maze += "|";
+      for (int j = 0; j < size - 1; j++){
+        if (adjMatrix[j][i].RIGHT)
+          maze += (adjMatrix[j][i].value.equals("#")) ? "#|" : " |";
+        else {
+          if (adjMatrix[j][i].value.equals("#")) {
+            maze += "#";
+            maze += (adjMatrix[j + 1][i].value.equals("#")) ? "#" : " ";
+          }
+          else
+            maze += "  ";
+        }
+      }
+
+      maze += adjMatrix[size - 1][i].value.equals("#") ? "#|\n+" : " |\n+";
+      if (i < size - 1) {
+        for (int j = 0; j < size; j++) {
+          if (adjMatrix[j][i].DOWN)
+            maze += "-";
+          else
+            maze += (adjMatrix[j][i].value.equals("#")) ? "#" :" ";
+          maze += "+";
+        }
+        maze += "\n";
+      }
+    }
+
+    for (int i = 0; i < size; i++){
+        maze += (!adjMatrix[i][size-1].DOWN) ? "#":"-+";
     }
 
     maze += "+";
@@ -172,7 +224,34 @@ public class Graph {
    * @return maze
    */
   public String printBFS() {
-    return null;
+    Vertex currentVertex = vertexList[0];
+    Queue<Vertex> verticesQueue = new LinkedList<Vertex>();
+    verticesQueue.add(currentVertex);
+    int step = 0;
+
+    while(!verticesQueue.isEmpty() && !currentVertex.equals(vertexList[vertexList.length- 1])){
+      currentVertex = verticesQueue.remove();
+      currentVertex.color = VertexColor.BLACK;
+      currentVertex.step = step;
+      step++;
+      for (Vertex vertex : currentVertex.adjList){
+        if (vertex.color == VertexColor.WHITE){
+          vertex.color = VertexColor.GRAY;
+          vertex.previous = currentVertex;
+          verticesQueue.add(vertex);
+        }
+      }
+
+    }
+
+    while(currentVertex != vertexList[0])
+    {
+      currentVertex.value = "#";
+      currentVertex = currentVertex.previous;
+    }
+    currentVertex.value = "#";
+
+    return solveMaze();
   }
 
   /**
