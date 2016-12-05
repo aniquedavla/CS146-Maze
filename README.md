@@ -1,6 +1,6 @@
 # CS146 Project 3 - Maze
-Keshav Narula - 009745138
-Rodion Yaryy - 010915333
+Keshav Narula
+Rodion Yaryy
 
 In this project, we implemented a "perfect" Maze, where all cells of the maze are connected. We used Depth First Search
 approach to build a perfect Maze first. After building the Maze, we implemented Depth First Search (DFS) and
