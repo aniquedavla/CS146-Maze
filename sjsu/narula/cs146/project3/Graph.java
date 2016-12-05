@@ -259,6 +259,11 @@ public class Graph {
    * @return maze
    */
   public String printDFS() {
+    for (int i = 0; i < vertexList.length; i++) {
+      vertexList[i].color = VertexColor.WHITE;
+      vertexList[i].step = -1;
+      vertexList[i].previous = null;
+    }
     Vertex currentVertex = vertexList[0];
     Stack<Vertex> verticesStack = new Stack<>();
     verticesStack.push(currentVertex);
@@ -282,7 +287,6 @@ public class Graph {
       currentVertex = currentVertex.previous;
     }
     currentVertex.value = "#";
-
     System.out.println("\n\nDFS:");
     System.out.println("\n" + printMaze() + "\n");
     return solveMaze();

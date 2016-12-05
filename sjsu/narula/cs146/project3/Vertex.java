@@ -10,9 +10,6 @@ enum VertexColor {
  * Vertex class
  */
 public class Vertex {
-  public char label;
-  public boolean wasVisited;
-
   public boolean UP = true;
   public boolean DOWN = true;
   public boolean LEFT = true;
